@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+mic=$(timeout 5s wpctl get-volume @DEFAULT_AUDIO_SOURCE@ || echo "0")
+
+if [ "$mic" != "${mic%\[MUTED\]}" ]; then
+    icon=" "
+else
+    icon=" "
+fi
+
+mic="${mic#Volume: }"
+mic=${mic//" [MUTED]"}
+
+split() {
+	# For ommiting the . without calling and external program.
+	IFS=$2
+	set -- $1
+	printf '%s' "$@"
+}
+
+mic="$(printf "%.0f" "$(split "$mic" ".")")"
+
+echo "$icon$mic%"
