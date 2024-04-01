@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-brightness="$(xbacklight -get | awk -F'.' '{print $1}')"
+brightness="$(brillo -G | awk -F'.' '{print $1}')"
 echo "$brightness%"
