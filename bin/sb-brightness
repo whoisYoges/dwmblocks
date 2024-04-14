@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-brightness="$(brillo -G | awk -F'.' '{print $1}')"
-echo "$brightness%"
+brightness="$(brillo -G)"
+printf "%.0f%%\n" "$brightness"
